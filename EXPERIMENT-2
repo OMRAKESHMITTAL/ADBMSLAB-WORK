@@ -1,0 +1,90 @@
+-- create table client master
+create table CLIENT_MASTER_1(CLIENTNO varchar(6) check(CLIENTNO like 'C%'),NAME
+varchar(20) NOT NULL,ADDRESS1 varchar(30),ADDRESS2 varchar(30),CITY varchar(15),PINCODE
+integer,STATE varchar(15),BALDUE decimal(10,2),primary key(CLIENTNO));
+
+select * from CLIENT_MASTER_1;
+-- create table product master
+create table PRODUCT_MASTER_1(PRODUCTNO varchar(6) check(PRODUCTNO like 'P%'),DESCRIPTION
+varchar(15) NOT NULL,PROFITPERCENT DECIMAL(4,2) NOT NULL,UNITMEASURE VARCHAR(10) NOT
+NULL,QTYONHAND INT NOT NULL,REORDERVL INT NOT NULL,SELLPRICE DECIMAL(8,2) NOT
+NULL,COSTPRICE DECIMAL(8,2) NOT NULL,PRIMARY KEY(PRODUCTNO));
+
+SELECT * FROM PRODUCT_MASTER_1;
+-- create table salesman master
+CREATE TABLE SALESMAN_MASTER_1(SALESMANNO VARCHAR(6), PRIMARY KEY
+(SALESMANNO) ,CHECK(SALESMANNO LIKE 'S%'),SALESMANNAME VARCHAR(20) NOT NULL,ADDRESS1
+VARCHAR(30) NOT NULL,ADDRESS2 VARCHAR(30),CITY VARCHAR(20),PINCODE INT,STATE
+VARCHAR(20),SALAMT DECIMAL(8,2) NOT NULL CHECK(SALAMT LIKE '0%'),TGTTOGET DECIMAL(6,2)
+NOT NULL CHECK(TGTTOGET LIKE '%0'),YTDSALES DECIMAL(6,2) NOT NULL,REMARKS VARCHAR(60));
+
+SELECT * FROM SALESMAN_MASTER_1;
+-- insert data in client master
+insert into CLIENT_MASTER_1 values('C00001','Ivan bayross','','','Mumbai',400054,'Maharashtra',15000);
+insert into CLIENT_MASTER_1 values('C0002', 'Mamta muzumdar','','',
+'Madras',780001,'Tamilnadu', 0);
+insert into CLIENT_MASTER_1 values('C0003', 'Chhaya bankar','','', 'Mumbai','400057',
+'Maharashtra', 5000);
+insert into CLIENT_MASTER_1 values('C0004', 'Ashwini joshi','','', 'Bangalore','560001',
+'Karnataka', 0);
+insert into CLIENT_MASTER_1 values('C0005', 'Hansel colaco','','',
+'Mumbai' ,'400060','Maharashtra', 2000);
+insert into CLIENT_MASTER_1 values('C0006', 'Deepak sharma','','', 'Mangalore', '560050',
+'Karnataka',0);
+-- insert data in product master
+insert into PRODUCT_MASTER_1 values ('P00001','T-Shirt',5,'Piece',200,50,350,250);
+insert into PRODUCT_MASTER_1 values ('P0345','Shirts',6,'Piece',150,50,500,350);
+insert into PRODUCT_MASTER_1 values ('P06734','Cotton jeans',5,'Piece',100,20,600,450);
+insert into PRODUCT_MASTER_1 values ('P07865','Jeans',5, 'Piece',100,20,750,500);
+insert into PRODUCT_MASTER_1 values ('P07868','Trousers',2,'Piece',150,50,850,550);
+insert into PRODUCT_MASTER_1 values ('P07885','Pull Overs',2.5,'Piece',80,30,700,450);
+insert into PRODUCT_MASTER_1 values ('P07965','Denim jeans',4,'Piece',100,40,350,250);
+insert into PRODUCT_MASTER_1 values ('P07975','Lycra tops',5,'Piece',70,30,300,175);
+insert into PRODUCT_MASTER_1 values ('P08865','Skirts',5, 'Piece',75,30,450,300);
+
+-- insert into salesman master
+insert into SALESMAN_MASTER_1 values ('S00001', 'Aman', 'A/14',
+'Worli','Mumbai',400002,'Maharashtra',0,0,0,'');
+insert into SALESMAN_MASTER_1 values
+('S00002','Omkar','65','Nariman','Mumbai',400001,'Maharashtra',0,0,0,'');
+insert into SALESMAN_MASTER_1 values
+('S00003','Raj','P-7','Bandra','Mumbai',400032,'Maharashtra',0,0,0,'');
+insert into SALESMAN_MASTER_1 values ('S00004','Ashish','A/
+5','Juhu','Mumbai',400044,'Maharashtra',0,0,0,'');
+
+-- create table author
+CREATE TABLE AUTHOR(Author_ID varchar(5), primary key(Author_ID),Lastname varchar(15) not
+null,Firstname varchar(15) not null,Email varchar(40),City varchar(15),Country
+varchar(15));
+-- create table book
+create table BOOK(Book_ID varchar(5) ,primary key(Book_ID), check(Book_ID like
+'B%'),Book_Title varchar(30) not null,Copies int check(Copies>2));
+-- create table author list
+create table AUTHOR_LIST(Author_ID varchar(5) ,foreign key(Author_ID) references
+AUTHOR(Author_ID),Book_ID varchar(5),primary key(Author_ID,Book_ID),Role varchar(15));
+
+select * from BOOK;
+
+select * from AUTHOR;
+
+select * from AUTHOR_LIST;
+-- insert into author
+insert into AUTHOR values ('A1','OM','MITTAL','500096091@STU.UPES.AC.IN','SITARGANJ', 'India');
+insert into AUTHOR values ('A2', 'ABHISHEK', 'CHAUCHAN', 'ABHISHEK@GMAIL.COM','HIMACHAL', 'INDIA');
+insert into AUTHOR values ('A3', 'KUSHAGRA', 'PARASRAMKA', 'PARASRAMKA@GMAIL.COM',
+'UP','INDIA');
+insert into AUTHOR values ('A4', 'ATULYA', 'VERMA', 'VERMA@GMAIL.COM','UP',
+'INDIA');
+-- insert into book
+insert into BOOK values ('B1001', 'SMARTBOOK',20);
+insert into BOOK values('B1002','RIGHTBOOK',100);
+insert into BOOK values('B1003','MYBOOK',50);
+insert into BOOK values('B1004','YOURBOOK',150);
+-- insert into author list
+INSERT INTO AUTHOR_LIST VALUES('A1', 'B1001', 'publisher');
+INSERT INTO AUTHOR_LIST VALUES('A2','B1002','publisher');
+INSERT INTO AUTHOR_LIST VALUES('A3','B1003','publisher');
+INSERT INTO AUTHOR_LIST VALUES('A4','B1004','publisher');
+
+alter table AUTHOR_LIST add Publisher varchar(30)
+
